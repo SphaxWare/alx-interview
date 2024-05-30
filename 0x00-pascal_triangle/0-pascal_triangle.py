@@ -2,6 +2,8 @@
 """Pascal triangle"""
 
 def pascal_triangle(n):
+    if n <= 0:
+        return []
     res = [[1]]
 
     for i in range(n - 1):
