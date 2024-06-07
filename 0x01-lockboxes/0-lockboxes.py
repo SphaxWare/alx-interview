@@ -7,6 +7,8 @@ def canUnlockAll(boxes):
     Check lockboxes and see if
     if can unlock them all
     """
+    if (type(boxes) is not list or len(boxes) == 0):
+        return False
     n = len(boxes)
     visited = set()
     queue = [0]
