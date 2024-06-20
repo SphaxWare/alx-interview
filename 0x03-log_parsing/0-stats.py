@@ -18,7 +18,7 @@ status_counts = {200: 0, 301: 0,
 
 def print_stats():
     """Prints the accumulated statistics"""
-    print(f"Total file size: {total_size}")
+    print(f"File size: {total_size}")
     for status in sorted(status_counts.keys()):
         if status_counts[status] > 0:
             print(f"{status}: {status_counts[status]}")
