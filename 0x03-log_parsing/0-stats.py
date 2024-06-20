@@ -4,13 +4,17 @@ import sys
 import re
 import signal
 
-
 pattern = re.compile(
-        r'^(?P<ip>\d+\.\d+\.\d+\.\d+) - \[(?P<date>[^\]]+)\] "GET /projects/260 HTTP/1.1" (?P<status>\d{3}) (?P<size>\d+)$'
-        )
+    r'^(?P<ip>\d+\.\d+\.\d+\.\d+) - \[(?P<date>[^\]]+)\] "GET /projects/260 '
+    r'HTTP/1.1" (?P<status>\d{3}) (?P<size>\d+)$'
+)
 line_count = 0
 total_size = 0
-status_counts = {200: 0, 301: 0, 400: 0, 401: 0, 403: 0, 404: 0, 405: 0, 500: 0}
+status_counts = {200: 0, 301: 0,
+                 400: 0, 401: 0,
+                 403: 0, 404: 0,
+                 405: 0, 500: 0}
+
 
 def print_stats():
     """Prints the accumulated statistics"""
@@ -19,10 +23,12 @@ def print_stats():
         if status_counts[status] > 0:
             print(f"{status}: {status_counts[status]}")
 
+
 def signal_handler(sig, frame):
     """Handles keyboard interruption (Ctrl + C)"""
     print_stats()
     sys.exit(0)
+
 
 signal.signal(signal.SIGINT, signal_handler)
 
