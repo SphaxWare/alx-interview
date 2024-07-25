@@ -12,17 +12,14 @@ def makeChange(coins, total):
     """
     if total <= 0:
         return 0
-    # Initialize dp array with infinity
-    dp = [float('inf')] * (total + 1)
-    print(f"db = {dp}")
-    # Base case: 0 coins are needed to make the amount 0
-    dp[0] = 0
-
-    # Fill dp array
+    coins.sort(reverse=True)
+    current = 0
+    counter = 0
     for coin in coins:
-        for amount in range(coin, total + 1):
-            if dp[amount - coin] != float('inf'):
-                dp[amount] = min(dp[amount], dp[amount - coin] + 1)
-
-    # Return result
-    return dp[total] if dp[total] != float('inf') else -1
+        while coin <= total:
+            current = total // coin
+            counter += current
+            total -= current * coin
+            if total == 0:
+                return counter
+    return -1
