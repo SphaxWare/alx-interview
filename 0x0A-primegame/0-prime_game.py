@@ -3,6 +3,7 @@
 
 
 def isWinner(x, nums):
+    """winner winner chicken dinner"""
     ben = 0
     maria = 0
 
