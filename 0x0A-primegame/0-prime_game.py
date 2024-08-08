@@ -3,24 +3,11 @@
 
 
 def isWinner(x, nums):
-    """
-    Maria and Ben are playing a game.
-    Given a set of consecutive integers starting from 1 up
-    to and including n, they take turns choosing a prime
-    number from the set and removing that number and its
-    multiples from the set. The player that cannot make a
-    move loses the game.
-
-    They play x rounds of the game, where n may be different
-    for each round. Assuming Maria always goes first and both
-    players play optimally, determine who the winner of each
-    game is.
-    """
     ben = 0
     maria = 0
 
     def isPrime(n):
-        """check is number is prime"""
+        """Check if a number is prime"""
         if n > 1:
             for i in range(2, (n // 2) + 1):
                 if (n % i) == 0:
@@ -28,29 +15,29 @@ def isWinner(x, nums):
             return True
         return True
 
-    def arr(n):
-        """make array"""
-        nums = []
-        for _ in range(1, n + 1):
-            nums.append(_)
-        return nums
-
+    
     def sieve(n):
         """Generate all prime numbers up to n using a simple sieve."""
-        nums = arr(n)
         primes = []
-        for num in nums:
+        for num in range(1, n):
             if isPrime(num):
                 primes.append(num)
         return primes
-    turns = 0
-    for n in nums:
-        primes = sieve(n)
-        if primes == []:
+
+    for j in range(x):
+        roundset = list(range(1, nums[j] + 1))
+        primes = sieve(nums[j])
+        if not primes:
             ben += 1
-        for i in primes:
+            continue
+
+        turns = 0
+        while primes:
+            current_prime = primes.pop(0)
             turns += 1
-            primes.remove(i)
+            roundset = [num for num in roundset if num % current_prime != 0]
+            primes = [p for p in primes if p in roundset]
+
         if turns % 2 == 0:
             ben += 1
         else:
