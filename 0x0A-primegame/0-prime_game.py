@@ -19,24 +19,29 @@ def isWinner(x, nums):
     def sieve(n):
         """Generate all prime numbers up to n using a simple sieve."""
         primes = []
-        for num in range(1, n):
+        for num in range(2, n):
             if isPrime(num):
                 primes.append(num)
         return primes
+    
+    def removemul(prime, arr):
+        """remove prime and its mutiples"""
+        for n in arr:
+            if n % prime == 0:
+                arr.remove(n)
+        return arr
 
     for j in range(x):
         roundset = list(range(1, nums[j] + 1))
-        primes = sieve(nums[j])
-        if not primes:
+        primes = sieve(nums[j] + 1)
+        if primes == []:
             ben += 1
             continue
 
         turns = 0
-        while primes:
-            current_prime = primes.pop(0)
+        for i in primes:
             turns += 1
-            roundset = [num for num in roundset if num % current_prime != 0]
-            primes = [p for p in primes if p in roundset]
+            roundset = removemul(i, roundset)
 
         if turns % 2 == 0:
             ben += 1
