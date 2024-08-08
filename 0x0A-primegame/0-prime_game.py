@@ -15,7 +15,6 @@ def isWinner(x, nums):
             return True
         return True
 
-    
     def sieve(n):
         """Generate all prime numbers up to n using a simple sieve."""
         primes = []
