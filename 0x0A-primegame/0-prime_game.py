@@ -9,6 +9,8 @@ def isWinner(x, nums):
 
     def isPrime(n):
         """Check if a number is prime"""
+        if n == 1:
+            return False
         if n > 1:
             for i in range(2, (n // 2) + 1):
                 if (n % i) == 0:
@@ -23,7 +25,7 @@ def isWinner(x, nums):
             if isPrime(num):
                 primes.append(num)
         return primes
-    
+
     def removemul(prime, arr):
         """remove prime and its mutiples"""
         for n in arr:
@@ -37,6 +39,9 @@ def isWinner(x, nums):
         if primes == []:
             ben += 1
             continue
+
+        if len(nums) == 1 and isPrime(nums[0]):
+            maria += 1
 
         turns = 0
         for i in primes:
